@@ -5,22 +5,22 @@ import "./GrassMap.css";
 
 function GrassMap() {
   //* ***********  countdown *********
-  const [count, setCount] = useState(3);
+  const [count, setCount] = useState("3");
   const [classMap, setClassMap] = useState("hidden");
   const [classP, setClassP] = useState("visible");
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCount((prevCount) => prevCount - 1);
+      setCount((prevCount) => parseInt(prevCount, 10) - 1);
     }, 1000);
 
     return () => clearInterval(timer);
   }, []);
 
   if (count === 0) {
-    setCount("GO!");
+    setCount("");
     setClassMap("mapboxg1-map");
-    setClassP("hidden");
+    setClassP("hidden2");
   }
 
   //* ***********  map *********
@@ -29,7 +29,8 @@ function GrassMap() {
   const geojson = {
     type: "FeatureCollection",
     features: [
-      { id: 1,
+      {
+        id: 1,
         class: "user",
         type: "Feature",
         geometry: {
@@ -41,7 +42,8 @@ function GrassMap() {
           description: "Washington, D.C.",
         },
       },
-      { id: 2,
+      {
+        id: 2,
         class: "objectif",
         type: "Feature",
         geometry: {
@@ -57,6 +59,7 @@ function GrassMap() {
   };
   const [mapi, setMapi] = useState();
 
+  // eslint-disable-next-line consistent-return
   useEffect(() => {
     // Créer la carte uniquement lorsque le composant est monté dans le DOM
     setMapi(
@@ -74,25 +77,38 @@ function GrassMap() {
         mapi.remove();
       };
     }
-  }, [classMap]); // Le tableau vide en tant que deuxième argument signifie que cet effet s'exécutera uniquement après le premier rendu
-  {
-    mapi !== undefined &&
-      geojson.features.map((feature) =>
-       new mapboxgl.Marker(feature)
-          .setLngLat(feature.geometry.coordinates)
-          .addTo(mapi)
-          .getElement()
-          .classList.add(feature.class)
-      );
-  }
+  }, []);
+
+  geojson.features.map((feature) =>
+    new mapboxgl.Marker(feature)
+      .setLngLat(feature.geometry.coordinates)
+      .addTo(mapi)
+      .getElement()
+      .classList.add(feature.class)
+  );
+
+  //* ***********  boutonBravo *********
+  const message = "Well Played!";
+  const handleClick = () => {
+    setClassMap("hidden");
+    setClassP("visible");
+    setTimeout(() => {
+      window.location = "/";
+    }, "1000");
+  };
 
   return (
     <>
-      <p className={classP}>{count}</p>
-      <div
-      id="map"
-      className={classMap}
-      style={{ width: "75vw", height: "75vh" }} /></>
+      <div className="overlay">
+        <p className={classP}>{Number.isNaN(count) ? message : count}</p>
+      </div>
+      <div className={classMap}>
+        <div id="map" />
+      </div>
+      <button type="button" className={classMap} onClick={handleClick}>
+        I'm here!
+      </button>
+    </>
   );
 }
 

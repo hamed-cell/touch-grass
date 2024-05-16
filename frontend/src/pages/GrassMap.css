@@ -3,8 +3,8 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    width: 35px;
-    height: 35px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     cursor: pointer;
   }
@@ -23,12 +23,27 @@ svg{display: none;}
 
   #map {
     border-radius: 30px;
+    width: 75vw;
+    height: 75vh;
   }
 
   .hidden {
+    visibility: hidden;
+  }
+
+  .hidden2 {
     display: none;
   }
 
   .visible {
     display: flex;
+  }
+
+  .overlay {
+    z-index: 2;
+    position: absolute;
+    display: flex;
+    left: 0;
+    right: 0;
+    justify-content: center;
   }

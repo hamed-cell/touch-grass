@@ -8,6 +8,7 @@ body {
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
+  text-align: center;
 }
 
 @font-face {
@@ -37,6 +38,7 @@ button {
   font-family: "PoetsenOne";
   position: relative;
   cursor: pointer;
+  margin: 3vh;
 }
 
 button::after {
