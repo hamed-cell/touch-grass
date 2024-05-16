@@ -4,6 +4,26 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import "./GrassMap.css";
 
 function GrassMap() {
+  //* ***********  countdown *********
+  const [count, setCount] = useState(3);
+  const [classMap, setClassMap] = useState("hidden");
+  const [classP, setClassP] = useState("visible");
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCount((prevCount) => prevCount - 1);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  if (count === 0) {
+    setCount("GO!");
+    setClassMap("mapboxg1-map");
+    setClassP("hidden");
+  }
+
+  //* ***********  map *********
   mapboxgl.accessToken =
     "pk.eyJ1IjoiaGFtZWQxMiIsImEiOiJjbHc5MGh3d2YyYTltMnFweXNhZHgwYWw2In0.AVp8L6FfnEg_r8aRl6Qffw";
   const geojson = {
@@ -54,7 +74,7 @@ function GrassMap() {
         mapi.remove();
       };
     }
-  }, []); // Le tableau vide en tant que deuxième argument signifie que cet effet s'exécutera uniquement après le premier rendu
+  }, [classMap]); // Le tableau vide en tant que deuxième argument signifie que cet effet s'exécutera uniquement après le premier rendu
   {
     mapi !== undefined &&
       geojson.features.map((feature) =>
@@ -66,7 +86,14 @@ function GrassMap() {
       );
   }
 
-  return <div id="map" style={{ width: "75vw", height: "75vh" }} />;
+  return (
+    <>
+      <p className={classP}>{count}</p>
+      <div
+      id="map"
+      className={classMap}
+      style={{ width: "75vw", height: "75vh" }} /></>
+  );
 }
 
 export default GrassMap;

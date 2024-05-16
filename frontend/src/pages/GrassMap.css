@@ -24,3 +24,11 @@ svg{display: none;}
   #map {
     border-radius: 30px;
   }
+
+  .hidden {
+    display: none;
+  }
+
+  .visible {
+    display: flex;
+  }
