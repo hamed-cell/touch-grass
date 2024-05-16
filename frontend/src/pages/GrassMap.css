@@ -1,0 +1,26 @@
+.user {
+    background-image: url('../assets/userping1.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+svg{display: none;}
+
+
+  .objectif {
+    background-image: url('../assets/objectif.png');
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  #map {
+    border-radius: 30px;
+  }

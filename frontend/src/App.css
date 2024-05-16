@@ -3,6 +3,11 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
 }
 
 @font-face {
@@ -42,11 +47,10 @@ button:hover {
   background-color: #689d71;
   color: white;
 }
-
 .HomePage {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   flex-direction: column;
-}
+} 
