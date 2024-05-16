@@ -25,6 +25,7 @@ button {
   font-size: 4vh;
   font-family: "PoetsenOne";
   position: relative;
+  cursor: pointer;
 }
 
 button::after {
