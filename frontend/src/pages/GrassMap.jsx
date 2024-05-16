@@ -9,18 +9,20 @@ function GrassMap() {
   const geojson = {
     type: "FeatureCollection",
     features: [
-      {
+      { id: 1,
+        class: "user",
         type: "Feature",
         geometry: {
           type: "Point",
-          coordinates: [-77.032, 38.913],
+          coordinates: [4.81117989, 45.77963006],
         },
         properties: {
           title: "Mapbox",
           description: "Washington, D.C.",
         },
       },
-      {
+      { id: 2,
+        class: "objectif",
         type: "Feature",
         geometry: {
           type: "Point",
@@ -40,10 +42,11 @@ function GrassMap() {
     setMapi(
       new mapboxgl.Map({
         container: "map", // container ID
-        style: "mapbox://styles/mapbox/streets-v12", // style URL
-        center: [-74.5, 40], // starting position [lng, lat]
+        style: "mapbox://styles/hamed12/clw8zr7c702to01qva71n24bd", // style URL
+        center: [4.92166672, 45.72939395], // starting position [lng, lat]
 
-        // Nettoye     zoom: 9, // starting zoom
+        // Nettoye
+        zoom: 9, // starting zoom
       })
     );
     if (mapi !== undefined) {
@@ -55,13 +58,15 @@ function GrassMap() {
   {
     mapi !== undefined &&
       geojson.features.map((feature) =>
-        new mapboxgl.Marker(feature)
+       new mapboxgl.Marker(feature)
           .setLngLat(feature.geometry.coordinates)
           .addTo(mapi)
+          .getElement()
+          .classList.add(feature.class)
       );
   }
 
-  return <div id="map" style={{ width: "100%", height: "400px" }} />;
+  return <div id="map" style={{ width: "75vw", height: "75vh" }} />;
 }
 
 export default GrassMap;

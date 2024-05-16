@@ -1,8 +1,22 @@
-.marker {
-    background-image: url('mapbox-icon.png');
+.user {
+    background-image: url('../assets/userping.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+svg{display: none;}
+
+
+  .objectif {
+    background-image: url('../assets/objectif.png');
     background-size: cover;
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     cursor: pointer;
   }
