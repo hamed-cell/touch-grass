@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { ToastContainer, toast, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./GrassMap.css";
 
-function GrassMap() {
+export default function GrassMap() {
   //* ***********  countdown *********
   const [count, setCount] = useState("3");
   const [classMap, setClassMap] = useState("hidden");
@@ -97,8 +99,46 @@ function GrassMap() {
     }, "1000");
   };
 
+  //* ***********  toast *********
+  const [count1, setCount1] = useState(0);
+  const encouragement = [
+    "Tu peux le faire",
+    "Je crois en toi",
+    "La nature te fera du bien",
+    "Tu n'es pas encore arrivé ? tu me déçois !",
+    "Grosse larve",
+    "Tu me dégoute",
+    "Gros caca",
+    "Tu es une honte",
+  ];
+  function notify() {
+    toast(encouragement[count], {
+      position: "bottom-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Slide,
+      });
+  }
+  useEffect(() => {
+    const interval = setInterval(() => {
+      notify();
+      setCount1(count1 + 1);
+      if (count1 === encouragement.length - 1) {
+        setCount1(0);
+      }
+    }, 3700);
+
+    return () => clearInterval(interval);
+  }, [count1]);
+
   return (
     <>
+      <ToastContainer />
       <div className="overlay">
         <p className={classP}>{Number.isNaN(count) ? message : count}</p>
       </div>
@@ -111,5 +151,3 @@ function GrassMap() {
     </>
   );
 }
-
-export default GrassMap;
